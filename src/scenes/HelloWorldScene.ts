@@ -84,7 +84,7 @@ export default class HelloWorldScene extends Phaser.Scene
         })
 
         this.physics.add.collider(this.star, this.platforms);
-        this.physics.add.overlap(this.player, this.star, this.handleCollectStar, undefined, this);
+        this.physics.add.overlap(this.player, this.star, this.handleCollectStar as ArcadePhysicsCallback | undefined, undefined, this);
 
         this.scoreText = this.add.text(16,16,'Score: 0', {
             fontSize: '32px',
@@ -95,7 +95,7 @@ export default class HelloWorldScene extends Phaser.Scene
 
         this.physics.add.collider(this.bombs, this.platforms);
 
-        this.physics.add.collider(this.player, this.bombs, this.handleHitBombs, undefined, this);
+        this.physics.add.collider(this.player, this.bombs, this.handleHitBombs as ArcadePhysicsCallback | undefined, undefined, this);
     }
 
     private handleHitBombs = (player: Phaser.GameObjects.GameObject, b: Phaser.Physics.Arcade.Image) => {
@@ -141,16 +141,16 @@ export default class HelloWorldScene extends Phaser.Scene
         }
 
         if (this.cursors.left?.isDown) {
-            this.player.setVelocityX(-160);
-            this.player.anims.play('left', true);
+            this.player?.setVelocityX(-160);
+            this.player?.anims.play('left', true);
         }
         else if (this.cursors.right?.isDown) {
-            this.player.setVelocityX(160);
-            this.player.anims.play('right', true);
+            this.player?.setVelocityX(160);
+            this.player?.anims.play('right', true);
         }
         else {
-            this.player.setVelocityX(0);
-            this.player.play('turn');
+            this.player?.setVelocityX(0);
+            this.player?.play('turn');
         }
 
         if (this.cursors.up?.isDown && this.player?.body.touching.down) {
